@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:/Program Files (x86)/Android/android-sdk/extras/google/google_play_services/libproject/google-play-services_lib/Google-play-services_lib1.iml" filepath="C:/Program Files (x86)/Android/android-sdk/extras/google/google_play_services/libproject/google-play-services_lib/Google-play-services_lib1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maps1.iml" filepath="$PROJECT_DIR$/maps1.iml" />
+    </modules>
+  </component>
+</project>
+
