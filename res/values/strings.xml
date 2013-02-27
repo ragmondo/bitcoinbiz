@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">maps1</string>
+    <string name="server_base">http://bcfxer.appspot.com/</string>
+    <string name="secure_server_base">https://bcfxer.appspot.com/</string>
+
 </resources>
