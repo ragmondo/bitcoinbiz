@@ -90,4 +90,20 @@ public class BitcoinBizActivity extends Activity {
             m.addMarker(new MarkerOptions().position(b.m_latlng).title(b.m_title).snippet(b.m_snippet));
         }
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+      //  ... // The rest of your onStart() code.
+        EasyTracker.getInstance().activityStart(this); // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    //    ... // The rest of your onStop() code.
+        EasyTracker.getInstance().activityStop(this); // Add this method.
+    }
+
 }
