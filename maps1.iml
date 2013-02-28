@@ -50,6 +50,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="libGoogleAnalyticsV2" level="project" />
   </component>
 </module>
 

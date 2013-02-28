@@ -9,4 +9,8 @@
 
     <!--Enable automatic exception tracking-->
     <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <string name="com.ragmondo.BitcoinBizActivity">Main</string>
+
+
 </resources>
