@@ -141,7 +141,7 @@ public class BitcoinBizActivity extends Activity {
 
     private void displayUpdatedLocations(ArrayList<BCLocation> locations, GoogleMap m) {
         for (BCLocation b : locations) {
-            m.addMarker(new MarkerOptions().position(b.m_latlng).title(b.m_title).snippet(b.m_snippet));
+            m.addMarker(new MarkerOptions().position(b.m_latlng).title(b.m_title).snippet(b.getSnippetAndUrl()));
         }
     }
 

@@ -36,4 +36,13 @@ public class BCLocation {
         this.m_latlng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
         return this;
     }
+
+    public String getSnippetAndUrl() {
+        String ret = "";
+        if (this.on_click_url != null && this.on_click_url.length() > 0) {
+            ret = "<a href=\"" + this.on_click_url + "\"> " + this.on_click_url + "</a><br><br>";
+        }
+        ret = ret + this.m_snippet;
+        return ret;
+    }
 }
