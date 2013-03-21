@@ -9,3 +9,8 @@ I don't have enough time to develop this app properly so thought I would put it 
 The only condition is regarding the data access - if you do use the /json or /kml endpoints to access the bitcoin business directory, then you must include the server generated links at the end.
 
 Other than that, feel free ! Let me know if you want push access btw.
+
+_______________________________________
+
+Install Google Play Services and add it as a libary project to this project:
+http://developer.android.com/google/play-services/setup.html
