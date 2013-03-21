@@ -12,5 +12,16 @@ Other than that, feel free ! Let me know if you want push access btw.
 
 _______________________________________
 
-Install Google Play Services and add it as a libary project to this project:
+Getting started steps:
+
+1. Fork this project
+
+2. Install Google Play Services and add it as a libary project to this project:
 http://developer.android.com/google/play-services/setup.html
+
+3. Create Google Maps Api key (for debugging use the debug.keystore)
+Follow guidelines here:https://developers.google.com/maps/documentation/android/start#the_google_maps_api_key
+
+4. Replace create API key in AndroidManifest.xml in this project. 
+
+Now you should be able to run and debug the project. 
