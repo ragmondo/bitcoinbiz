@@ -14,3 +14,7 @@ _______________________________________
 
 Install Google Play Services and add it as a libary project to this project:
 http://developer.android.com/google/play-services/setup.html
+
+Intellij user ? Follow the directions below in order to get play services correctly included in the app
+
+http://stackoverflow.com/questions/13719263/unable-instantiate-android-gms-maps-mapfragment/13744765#13744765
