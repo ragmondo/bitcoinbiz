@@ -37,6 +37,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -60,7 +61,8 @@ public class BitcoinBizActivity extends Activity implements LocationListener{
 	private AlertDialog alertDialog;
 private int locationLat;
 private int locationLng;
-private Location location;
+private Location position;
+private Marker positionMarker;
 
 //	public static class BusinessDisplayFragment extends DialogFragment {
 //		@Override
@@ -212,10 +214,10 @@ private Location location;
 	    criteria.setCostAllowed(true); 
 	    criteria.setPowerRequirement(Criteria.POWER_LOW); 
 	    provider = locationManager.getBestProvider(criteria, false);
-	    location = locationManager.getLastKnownLocation(provider);
-	    if (location != null) {
+	    position = locationManager.getLastKnownLocation(provider);
+	    if (position != null) {
 	        System.out.println("Provider " + provider + " has been selected.");
-	        onLocationChanged(location);
+	        onLocationChanged(position);
 	    }
 
 	}
@@ -318,30 +320,43 @@ private Location location;
 					}).setNegativeButton("No", new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if(location!=null) {
-								moveMapToLocation(location);
+							if(position!=null) {
+								addMarkerAndShow();
 								Toast.makeText(BitcoinBizActivity.this, "Showing last known location", Toast.LENGTH_SHORT).show();
 							}
 						}
 					}).create().show();
 		} else {
-			if(location!=null) {
-				moveMapToLocation(location);
+			if(position!=null) {
+				addMarkerAndShow();
 			} else {
 				Log.d(Tag, "Location is null ");
 			}
 		}
 	}
 	
-	private void moveMapToLocation(Location location){
-		Log.d(Tag, "moveMapToLocation  "+location);
-		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 7.5f);
+	private void addMarkerAndShow(){
+		LatLng latLng = new LatLng(position.getLatitude(), position.getLongitude());
+		positionMarker = mMap.addMarker(new MarkerOptions()
+        .position(latLng)
+        .title("Melbourne")
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+		moveMapToLocation(latLng);
+	}
+	
+	private void moveMapToLocation(LatLng latLng){
+		Log.d(Tag, "moveMapToLocation  "+latLng);
+		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, 7.5f);
 		mMap.animateCamera(update);
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		this.location = location;
+		this.position = location;
+		positionMarker = mMap.addMarker(new MarkerOptions()
+        .position(new LatLng(position.getLatitude(), position.getLongitude()))
+        .title("You")
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 	}
 
 	@Override
