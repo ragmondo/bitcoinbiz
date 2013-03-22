@@ -206,6 +206,11 @@ private Location location;
 	    // Define the criteria how to select the locatioin provider -> use
 	    // default
 	    Criteria criteria = new Criteria();
+	    criteria.setAccuracy(Criteria.ACCURACY_COARSE); 
+	    criteria.setAltitudeRequired(false); 
+	    criteria.setBearingRequired(false); 
+	    criteria.setCostAllowed(true); 
+	    criteria.setPowerRequirement(Criteria.POWER_LOW); 
 	    provider = locationManager.getBestProvider(criteria, false);
 	    location = locationManager.getLastKnownLocation(provider);
 	    if (location != null) {
