@@ -25,3 +25,7 @@ Follow guidelines here:https://developers.google.com/maps/documentation/android/
 4. Replace create API key in AndroidManifest.xml in this project. 
 
 Now you should be able to run and debug the project. 
+
+Intellij user ? Follow the directions below in order to get play services correctly included in the app
+
+http://stackoverflow.com/questions/13719263/unable-instantiate-android-gms-maps-mapfragment/13744765#13744765
