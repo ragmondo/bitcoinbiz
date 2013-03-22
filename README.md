@@ -19,10 +19,7 @@ Getting started steps:
 2. Install Google Play Services and add it as a libary project to this project:
 http://developer.android.com/google/play-services/setup.html
 
-3. Create Google Maps Api key (for debugging use the debug.keystore)
-Follow guidelines here:https://developers.google.com/maps/documentation/android/start#the_google_maps_api_key
-
-4. Replace create API key in AndroidManifest.xml in this project. 
+3. Replace your local debug.keystore with the one in the /misc folder OR set a custom debug.keystore in the preferences/android/build and target the file in the /misc folder
 
 Now you should be able to run and debug the project. 
 
