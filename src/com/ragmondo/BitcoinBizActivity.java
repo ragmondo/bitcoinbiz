@@ -298,7 +298,8 @@ private Location location;
 	private void locate() {
 		Log.d(Tag, "locate");
 		boolean enabled = locationManager
-		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
+		  .isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager
+		  .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 		if (!enabled) {
 			new AlertDialog.Builder(this)
 					.setTitle("Location access not enabled")
