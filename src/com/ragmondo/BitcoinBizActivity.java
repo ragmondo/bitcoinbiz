@@ -13,9 +13,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
@@ -38,9 +38,7 @@ public class BitcoinBizActivity extends Activity {
 
 	private GoogleMap mMap;
 
-	private Handler mapUpdateHandler;
-
-	private WebView mWebView;
+//	private WebView mWebView;
 	private AlertDialog alertDialog;
 
 //	public static class BusinessDisplayFragment extends DialogFragment {
@@ -154,7 +152,7 @@ public class BitcoinBizActivity extends Activity {
 
 		final ArrayList<BCLocation> locations = new ArrayList<BCLocation>();
 
-		mWebView = new WebView(this);
+//		mWebView = new WebView(this);
 
 		Log.d(Tag, "There are " + locations.size() + " in the list");
 
@@ -218,5 +216,21 @@ public class BitcoinBizActivity extends Activity {
 	public void onStop() {
 		super.onStop();
 		EasyTracker.getInstance().activityStop(this); // Add this method.
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem menuItem = menu.add(0, 0, 0, "Settings");
+		menuItem.setIcon(android.R.drawable.ic_menu_preferences);
+		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+		
+		menuItem = menu.add(0, 1, 1, "About");
+		menuItem.setIcon(android.R.drawable.ic_menu_info_details);
+		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+		menuItem = menu.add(0, 2, 2, "Locate me");
+		menuItem.setIcon(android.R.drawable.ic_menu_mylocation);
+		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
 	}
 }
