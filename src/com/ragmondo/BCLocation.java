@@ -45,4 +45,8 @@ public class BCLocation {
         ret = ret + this.m_snippet;
         return ret;
     }
+
+    public String getSnippet() {
+    	return this.m_snippet;
+    }
 }
