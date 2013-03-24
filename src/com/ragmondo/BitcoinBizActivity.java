@@ -1,46 +1,36 @@
 package com.ragmondo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
+import android.location.*;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
 import android.widget.Toast;
-
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.GoogleAnalytics;
 import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.MarkerOptionsCreator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BitcoinBizActivity extends Activity implements LocationListener{
 
@@ -241,6 +231,7 @@ private Location location;
 	protected void onResume() {
 		super.onResume();
 	    locationManager.requestLocationUpdates(provider, 400, 1, this);
+        locate();
 	}
 
 	@Override
@@ -260,6 +251,7 @@ private Location location;
 		MenuItem menuItem = menu.add(0, MENU_ITEM_SETTINGS, 0, "Settings");
 		menuItem.setIcon(android.R.drawable.ic_menu_preferences);
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menuItem.setEnabled(false);
 		
 		menuItem = menu.add(0, 1, 1, "About");
 		menuItem.setIcon(android.R.drawable.ic_menu_info_details);
@@ -275,7 +267,7 @@ private Location location;
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_ITEM_ABOUT:
-
+            displayAbout();
 			break;
 		case MENU_ITEM_LOCATE_ME:
 			locate();
@@ -290,9 +282,41 @@ private Location location;
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void locate() {
+    private void displayAbout() {
+
+        mGaTracker.sendEvent("MainMap", "button_press","about", new Long(0));
+
+        new AlertDialog.Builder(this)
+                .setTitle("About bitcoin businesses")
+                .setMessage(
+                        "For the details about the contributors, visit https://github.com/ragmondo/bitcoinbiz or http://www.getbitcoin.info")
+                .setPositiveButton("bitcoinbiz @ github", new OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String url = "https://github.com/ragmondo/bitcoinbiz";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+
+                    }
+                }).setNegativeButton("www.getbitcoin.info", new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String url = "http://www.getbitcoin.info";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+
+            }
+        }).create().show();
+    }
+
+    private void locate() {
 		Log.d(Tag, "locate");
-		boolean enabled = locationManager
+        mGaTracker.sendEvent("MainMap", "button_press","locate", new Long(0));
+
+        boolean enabled = locationManager
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 		if (!enabled) {
 			new AlertDialog.Builder(this)
